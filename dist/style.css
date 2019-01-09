@@ -46,6 +46,10 @@
   border: 1px solid #e63d65;
   color: #e63d65; }
 
+.invisible {
+  border: 1px solid black;
+  color: black; }
+
 * {
   font-family: 'Roboto', sans-serif;
   background-color: black; }

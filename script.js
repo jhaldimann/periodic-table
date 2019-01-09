@@ -151,12 +151,27 @@ let addDivs = (div, element) => {
 let splitElements = () => {
   for(let i = 1; i < 8; i++){
     let div = document.querySelector('.row'+i);
-    div.childNodes.forEach((element,index) => {
-      if(index >= 2 && div.childNodes.length === 8){
-        element.style.cssText += ';float: right;';
-      }else if(index >= (div.childNodes.length/2) && div.childNodes.length !== 18){
-        element.style.cssText += ';float: right;';
+
+    if(div.childNodes.length === 18){
+      return;
+    } else if(div.childNodes.length === 8){
+      for(let i = 0; i <= 9; i++){
+        let newElement = document.createElement("div");
+        let pElement = document.createElement("p");
+        pElement.innerHTML = "0";
+        newElement.appendChild(pElement);
+        newElement.className = "element invisible";
+        div.insertBefore(newElement,div.childNodes[2]);
       }
-    });
+    } else {
+      for(let i = 0; i <= 15; i++){
+        let newElement = document.createElement("div");
+        let pElement = document.createElement("p");
+        pElement.innerHTML = "0";
+        newElement.appendChild(pElement);
+        newElement.className = "element invisible";
+        div.insertBefore(newElement,div.childNodes[1]);
+      }
+    }
   }
 };

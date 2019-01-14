@@ -41,3 +41,8 @@ p {
 .invisible:hover {
   transform: scale(1) !important;
 }
+
+.number {
+  font-size: 7px;
+  transform: translateY(-100%);
+}

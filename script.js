@@ -55,7 +55,7 @@ let table = [
   [ 'Xe', 'Xenon', '131.293', 18, 5, 'nobelgases' ],
   [ 'Cs', 'Caesium', '132.9054', 1, 6, 'alkali' ],
   [ 'Ba', 'Barium', '132.9054', 2, 6, 'alkalin' ],
-  [ 'La-Lu', '', '', '', 6, 'othermetal' ],
+  [ 'La-Lu', '', '1.0079', '', 6, 'othermetal' ],
   [ 'La', 'Lanthanum', '138.90547', 4, 9, 'lanthanoids' ],
   [ 'Ce', 'Cerium', '140.116', 5, 9, 'lanthanoids' ],
   [ 'Pr', 'Praseodymium', '140.90765', 6, 9, 'lanthanoids' ],
@@ -88,7 +88,7 @@ let table = [
   [ 'Rn', 'Radon', '(222)', 18, 6, 'nobelgases' ],
   [ 'Fr', 'Francium', '(223)', 1, 7, 'alkali' ],
   [ 'Ra', 'Radium', '(226)', 2, 7, 'alkalin' ],
-  [ 'Ac-Lr', '', '', '', 7, 'othermetal' ],
+  [ 'Ac-Lr', '', '1.0079', '', 7, 'othermetal' ],
   [ 'Ac', 'Actinium', '(227)', 4, 10, 'actinoids' ],
   [ 'Th', 'Thorium', '232.03806', 5, 10, 'actinoids' ],
   [ 'Pa', 'Protactinium', '231.0588', 6, 10, 'actinoids' ],
@@ -141,8 +141,12 @@ let init = () => {
 
 let addDivs = ( div, element ) => {
   let p = document.createElement("p");
+  let secondP = document.createElement("p");
   p.innerHTML = element[ 0 ];
+  secondP.innerHTML = element[ 2 ];
+  secondP.className += "number";
   div.appendChild(p);
+  div.appendChild(secondP);
   div.className = 'element ' + element[ 5 ];
   let row = document.querySelector('.row' + element[ 4 ]);
   row.appendChild(div);
@@ -156,22 +160,25 @@ let splitElements = () => {
       return;
     } else if (div.childNodes.length === 8) {
       for (let i = 0; i <= 9; i++) {
-        let newElement = document.createElement("div");
-        let pElement = document.createElement("p");
-        pElement.innerHTML = "0";
-        newElement.appendChild(pElement);
-        newElement.className = "element invisible";
-        div.insertBefore(newElement, div.childNodes[ 2 ]);
+        appendElements(div,2);
       }
     } else {
       for (let i = 0; i <= 15; i++) {
-        let newElement = document.createElement("div");
-        let pElement = document.createElement("p");
-        pElement.innerHTML = "0";
-        newElement.appendChild(pElement);
-        newElement.className = "element invisible";
-        div.insertBefore(newElement, div.childNodes[ 1 ]);
+        appendElements(div,1);
       }
     }
   }
 };
+
+let appendElements = (div, type) => {
+  let newElement = document.createElement("div");
+  let pElement = document.createElement("p");
+  let secondPElement = document.createElement("p");
+  pElement.innerHTML = "0";
+  secondPElement.innerHTML = "0";
+  secondPElement.className += "number";
+  newElement.appendChild(pElement);
+  newElement.appendChild(secondPElement);
+  newElement.className = "element invisible";
+  div.insertBefore(newElement, div.childNodes[ type ]);
+}
